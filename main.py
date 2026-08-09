@@ -26,9 +26,8 @@ def run_web_server():
     server.serve_forever()
 
 threading.Thread(target=run_web_server, daemon=True).start()
-
-# --- New Bot Token ---
-TOKEN = "8802980339:AAGIFlw9K7v1NIEic0UbcHoNPvbDrxz5cq8"
+w Bot Token ---
+TOKEN = os.environ.get("BOT_TOKEN")
 
 # --- Menus & Handlers ---
 
