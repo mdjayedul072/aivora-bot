@@ -9,7 +9,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
-# --- Render Web Server Setup ---
+# Render Web Server Setup
 class HealthCheckHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -26,11 +26,11 @@ def run_web_server():
     server.serve_forever()
 
 threading.Thread(target=run_web_server, daemon=True).start()
-w Bot Token ---
-TOKEN = os.environ.get("BOT_TOKEN")
 
-# --- Menus & Handlers ---
+# Bot Token Setup
+TOKEN = os.environ.get("BOT_TOKEN", "8802980339:AAGIFlw9K7v1NIEic0UbcHoNPvbDrxz5cq8")
 
+# Menus & Handlers
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [
@@ -66,7 +66,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif update.callback_query:
         await update.callback_query.message.edit_text(msg, reply_markup=reply_markup, parse_mode="Markdown")
 
-
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -75,7 +74,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if data == "main_menu":
         await start(update, context)
 
-    # 1. AI & Content
     elif data == "menu_ai":
         kb = [
             [
@@ -91,7 +89,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "🤖 **AI & Content Generation Services:**\n\nযেকোনো বিষয়ে প্রশ্ন করতে বা কনটেন্ট তৈরি করতে অপশন সিলেক্ট করুন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 2. Image & Media
     elif data == "menu_media":
         kb = [
             [
@@ -107,7 +104,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "🎨 **Image & Media Services:**\n\nAI ছবি জেনারেট বা ইমেজ এডিটিং সেবার জন্য অপশন বেছে নিন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 3. Voice & Audio
     elif data == "menu_voice":
         kb = [
             [
@@ -122,7 +118,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "🎙️ **Voice & Audio Services:**\n\nভয়েস ওভার ও অডিও তৈরির ফিচার নির্বাচন করুন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 4. PDF & Docs
     elif data == "menu_pdf":
         kb = [
             [
@@ -137,7 +132,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "📄 **PDF & Document Tools:**\n\nপিডিএফ সারসংক্ষেপ ও সিভি তৈরির টুল বেছে নিন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 5. Rewards & Bonus
     elif data == "menu_rewards":
         kb = [
             [
@@ -151,7 +145,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "🎁 **Daily Rewards & Bonus:**\n\nপ্রতিদিন ফ্রিতে ক্রেডিট পান এবং লিডারবোর্ড দেখুন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 6. Wallet & Credits
     elif data == "menu_wallet":
         kb = [
             [
@@ -166,7 +159,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "💰 **Wallet & Credits:**\n\nআপনার একাউন্টের ব্যালেন্স ও হিস্ট্রি চেক করুন।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 7. Referral System
     elif data == "menu_referral":
         kb = [
             [
@@ -181,7 +173,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 8. Premium Plans
     elif data == "menu_premium":
         kb = [
             [
@@ -199,7 +190,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 9. Admin Panel
     elif data == "menu_admin":
         kb = [
             [
@@ -211,7 +201,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "👨‍💻 **Admin Control Panel:**\n\nঅ্যাডমিন সেটিংস ও বডকাস্ট ফিচার।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # 10. Security & Status
     elif data == "menu_status":
         kb = [
             [
@@ -222,7 +211,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = "🛡️ **Security & System Status:**\n\nসার্ভার লেটেন্সি ও স্ট্যাটাস সম্পূর্ণ নরমাল রয়েছে।"
         await query.message.edit_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="Markdown")
 
-    # Action Placeholders
     elif data.startswith("act_"):
         kb = [[InlineKeyboardButton("🔙 Main Menu", callback_data="main_menu")]]
         await query.message.edit_text(
@@ -230,7 +218,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup(kb),
             parse_mode="Markdown",
         )
-
 
 def main():
     app = Application.builder().token(TOKEN).build()
@@ -240,6 +227,5 @@ def main():
     print("Bot is running...")
     app.run_polling(drop_pending_updates=True)
 
-
 if __name__ == "__main__":
-    main()
+    main()        
