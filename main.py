@@ -28,7 +28,7 @@ def run_web_server():
 threading.Thread(target=run_web_server, daemon=True).start()
 
 # Bot Token Setup
-TOKEN = os.environ.("TOKEN = "8802980339:AAGuhzlHo-fBfh2UHgGqDRwvaFci73xRsY")
+TOKEN = os.environ.get("BOT_TOKEN", "8802980339:AAGuhzlHo-fBfh2UHgGqDRwvaFci73xRsY")
 
 # Menus & Handlers
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
